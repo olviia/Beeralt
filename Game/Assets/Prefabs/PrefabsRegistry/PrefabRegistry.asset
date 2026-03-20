@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac9a8e9c2acb492bb56c3ceca452ed80, type: 3}
+  m_Name: PrefabRegistry
+  m_EditorClassIdentifier: Assembly-CSharp::Storage.PrefabRegistry
+  prefabs:
+  - id: flower
+    prefab: {fileID: 1993466584359443526, guid: 5d0afb712c82f234eb8860d13d4b20e4, type: 3}
+    displayName: OrangeFlower
+  - id: flowerblue
+    prefab: {fileID: 1993466584359443526, guid: f2d1599fcf226ca41b7e366f935e90df, type: 3}
+    displayName: BlueFlower
+  - id: flowerviolet
+    prefab: {fileID: 1993466584359443526, guid: f555ef418dd937f488e25421cf277057, type: 3}
+    displayName: VioletFlower

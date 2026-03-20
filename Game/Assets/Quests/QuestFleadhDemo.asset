@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea117a337f344e0e943ae9a8031cd4c5, type: 3}
+  m_Name: QuestFleadhDemo
+  m_EditorClassIdentifier: Assembly-CSharp::Quests.Quest
+  description: Navigate through the dangers of this world with the Bee and return
+    home with the pollen
+  objectives:
+  - {fileID: 11400000, guid: 780f9f749b8b80c42bae24d4b115f6a7, type: 2}
+  - {fileID: 11400000, guid: ea335e98dcf51f840bfeb60a954ebcde, type: 2}
