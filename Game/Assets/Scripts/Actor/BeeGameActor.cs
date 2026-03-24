@@ -99,37 +99,31 @@ namespace Actor
         public void MoveForward()
         {
             movementModeController.activeMovementStrategy.MoveForward();
-            movementModeController.TryLand(playerRigidbody.transform.forward);
         }
 
         public void MoveBackward()
         {
             movementModeController.activeMovementStrategy.MoveBackward();
-            movementModeController.TryLand(-playerRigidbody.transform.forward);
         }
 
         public void MoveLeft()
         {
             movementModeController.activeMovementStrategy.MoveLeft();
-            movementModeController.TryLand(-playerRigidbody.transform.right);
         }
 
         public void MoveRight()
         {
             movementModeController.activeMovementStrategy.MoveRight();
-            movementModeController.TryLand(playerRigidbody.transform.right);
         }
 
         public void MoveUp()
         {
             movementModeController.activeMovementStrategy.MoveUp();
-            movementModeController.TryLand(playerRigidbody.transform.up);
         }
 
         public void MoveDown()
         {
             movementModeController.activeMovementStrategy.MoveDown();
-            movementModeController.TryLand(-playerRigidbody.transform.up);
         }
 
 
