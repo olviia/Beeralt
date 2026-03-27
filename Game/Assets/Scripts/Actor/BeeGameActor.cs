@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Actor.Movement;
+using Attributes;
 using Commands;
 using Helpers;
 using Input;
@@ -18,7 +19,8 @@ namespace Actor
     
     //wire MovementModeController on scene
     public class BeeGameActor : MonoBehaviour, IGameActor, 
-                                IInventoryHolder, ILocationVisitor
+                                IInventoryHolder, ILocationVisitor,
+                                IHittable
     {
         [SerializeField] private InputManager inputManager;
         [SerializeField] private Rigidbody playerRigidbody;
@@ -29,6 +31,8 @@ namespace Actor
         
         //only one inventory can be created, and we cannot reassing a new inventory later
         public readonly Inventory inventory = new Inventory();
+        //same with health
+        [SerializeField] private Health health;
         
         //this is the force that counteracts gravity, so we can hover in place when nothing is pressed on keyboard
         //or keep walking on non horizontal surfaces
@@ -171,5 +175,10 @@ namespace Actor
             OnLocationLeft?.Invoke(location);
         }
 
+        public void TakeHit(int damage)
+        {
+            health.Decrease(damage);
+            Debug.Log($"Hit {damage} damage, health: {health.Current}/{health.Max}");
+        }
     }
 }
