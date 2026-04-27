@@ -20,7 +20,7 @@ namespace Actor.Movement
 
         [SerializeField] private LayerMask landingMask;
         //maybe move it to some const file one day
-        private const float editModeSpeedMultiplier = 20f;
+        private const float editModeSpeedMultiplier = 100f;
         
         public IMovementStrategy activeMovementStrategy { get; private set; }
         
