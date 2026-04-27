@@ -7,6 +7,8 @@ namespace Quests
     public class LocationObjective: QuestObjective
     {
         [SerializeField] private LocationData locationData;
+        [SerializeField] private bool requiresStay;
+        public bool RequiresStay => requiresStay;
 
         public override bool? CheckLocationReached(LocationData location)
         {

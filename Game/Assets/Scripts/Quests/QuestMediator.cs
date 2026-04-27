@@ -75,7 +75,8 @@ namespace Quests
         {
             //i just don't understand lambdas it was autocomplete
             EvaluateObjective(objective => objective.CheckLocationReached(location),
-                            (objective,completed) => new LocationProgress((LocationObjective)objective,completed));
+                            (objective,completed) => new LocationProgress(
+                                (LocationObjective)objective,completed));
             
         }
         
@@ -84,9 +85,16 @@ namespace Quests
         //in onTriggerExit of LocationTrigger
         //In other words: If the location matches, return   
         //false (remove it). Otherwise, return null (don't touch).
+        //
+        //also if the location objective doesnt require stay, but one time 
+        //visit only, then we just ignore it if we leave it
         private void HandleLocationLeft(LocationData location)
         {
-            EvaluateObjective(objective => objective.CheckLocationReached(location) == true?false:null, 
+            EvaluateObjective(objective =>
+                {
+                    if (objective is LocationObjective { RequiresStay: false }) return null;
+                    return objective.CheckLocationReached(location) == true ? false : null;
+                }, 
                 (objective,completed) => new LocationProgress((LocationObjective)objective,completed));
         }
 
@@ -98,24 +106,44 @@ namespace Quests
         private void EvaluateObjective(Func<QuestObjective, bool?> condition,
                                     Func<QuestObjective, bool, IObjectiveProgress> createProgress)
         {
+            var newObjective = new List<(Quest, QuestObjective)>();
             foreach(Quest quest in quests)
             {
                 foreach (QuestObjective objective in quest.Objectives)
                 {
                     bool? isCompleted = condition(objective);
-                    
-                    if(isCompleted == true)
+
+                    if (isCompleted == true)
+                    {
                         completedObjectives.Add((quest, objective));
-                    
+                        newObjective.Add((quest, objective));
+                    }
+
                     else if(isCompleted == false)
                         completedObjectives.Remove((quest, objective));
 
                     if(isCompleted != null) 
                        OnObjectiveChanged?.Invoke(createProgress(objective, (bool)isCompleted), quest);
                 }
+
+                CheckNextObjective(newObjective);
                 CheckQuestCompletion(quest);
             }
 
+        }
+        // there can be next objective of the quest, but in the future i will want to add
+        //next quest so the game will support chain quests.
+        private void CheckNextObjective(List<(Quest, QuestObjective)> newObjectives)
+        {
+            foreach (var (quest, objective) in newObjectives)
+            {
+                //here in foreach is used deconstruction principle for the
+                //better readability
+                if (objective.NextObjective != null)
+                {
+                    quest.AddObjective(objective.NextObjective);
+                }
+            }
         }
         
         public void StartQuest(Quest quest)

@@ -17,6 +17,9 @@ namespace Quests
         
         //i am overriding it so i can get different description format out of different goal types
         public virtual string GetDescription() => "";
+        
+        [SerializeField] private QuestObjective nextObjective;
+        public QuestObjective NextObjective => nextObjective;
 
     }
 }

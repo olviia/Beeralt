@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Quests
@@ -9,10 +10,23 @@ namespace Quests
         [SerializeField] private string description;
         
         //list of all subquests that are required to complete the quest
-        [SerializeField] private QuestObjective[] objectives;
+        [SerializeField] private List<QuestObjective> objectives;
+        
+
         
         //we don't want anything to change our objectives except designer in inspector
-        public QuestObjective[] Objectives => objectives;
+        public IReadOnlyList<QuestObjective> Objectives => objectives;
+
         public string GetDescription => description;
+
+        public void AddObjective(QuestObjective objective)
+        {
+            objectives.Add(objective);
+        }
+
+        public void ReplaceObjective(QuestObjective currentObjective, QuestObjective newObjective)
+        {
+            objectives[objectives.IndexOf(currentObjective)] =  newObjective;
+        }
     }
 }
